@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Details - JobFinder</title>
+    
+    <!-- Google Fonts - Rubik -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../src/output.css">
+</head>
+<body class="rubik-regular bg-gray-50 text-gray-900">
+    <!-- Navigation Header -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="../index.html" class="rubik-bold text-2xl text-blue-600">JobFinder</a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="../index.html" class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+                    <a href="jobs.html" class="text-gray-600 hover:text-blue-600 transition-colors">Jobs</a>
+                    <a href="companies.html" class="text-blue-600 rubik-medium">Companies</a>
+                    <a href="profile.html" class="text-gray-600 hover:text-blue-600 transition-colors">Profile</a>
+                </div>
+                
+                <!-- User Menu -->
+                <div class="flex items-center space-x-4" id="user-menu">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Company Details Content -->
+    <section class="py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Loading State -->
+            <div id="loading-container" class="flex justify-center items-center py-12">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+            </div>
+
+            <!-- Company Details -->
+            <div id="company-details" class="hidden">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <!-- Main Content -->
+                    <div class="lg:w-2/3">
+                        <!-- Company Header -->
+                        <div class="bg-white rounded-lg shadow-sm p-8 mb-6">
+                            <div class="flex items-start space-x-6">
+                                <div id="company-logo" class="w-24 h-24 bg-blue-600 rounded-lg flex items-center justify-center text-white text-2xl rubik-bold">
+                                    <!-- Company logo will be inserted here -->
+                                </div>
+                                <div class="flex-1">
+                                    <h1 id="company-name" class="rubik-bold text-3xl text-gray-900 mb-2"></h1>
+                                    <p id="company-industry" class="text-lg text-blue-600 rubik-medium mb-2"></p>
+                                    <div class="flex items-center text-gray-600 mb-4">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg>
+                                        <span id="company-location"></span>
+                                    </div>
+                                    <div class="flex space-x-4">
+                                        <button id="follow-btn" class="bg-blue-600 text-white px-6 py-2 rounded-lg rubik-medium hover:bg-blue-700 transition-colors">
+                                            Follow Company
+                                        </button>
+                                        <button id="share-btn" class="border border-gray-300 text-gray-700 px-6 py-2 rounded-lg rubik-medium hover:bg-gray-50 transition-colors">
+                                            Share
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Company Info -->
+                        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                            <h2 class="rubik-bold text-xl mb-4">About the Company</h2>
+                            <p id="company-description" class="text-gray-700 leading-relaxed mb-6"></p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h3 class="rubik-semibold text-lg mb-3">Company Size</h3>
+                                    <p id="company-size" class="text-gray-600"></p>
+                                </div>
+                                <div>
+                                    <h3 class="rubik-semibold text-lg mb-3">Founded</h3>
+                                    <p id="company-founded" class="text-gray-600"></p>
+                                </div>
+                                <div>
+                                    <h3 class="rubik-semibold text-lg mb-3">Website</h3>
+                                    <a id="company-website" href="#" target="_blank" class="text-blue-600 hover:text-blue-700"></a>
+                                </div>
+                                <div>
+                                    <h3 class="rubik-semibold text-lg mb-3">Headquarters</h3>
+                                    <p id="company-headquarters" class="text-gray-600"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Company Culture -->
+                        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                            <h2 class="rubik-bold text-xl mb-4">Company Culture & Values</h2>
+                            <div id="company-culture" class="space-y-4">
+                                <!-- Culture items will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Open Positions -->
+                        <div class="bg-white rounded-lg shadow-sm p-6">
+                            <div class="flex justify-between items-center mb-6">
+                                <h2 class="rubik-bold text-xl">Open Positions</h2>
+                                <span id="jobs-count" class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm rubik-medium"></span>
+                            </div>
+                            <div id="company-jobs" class="space-y-4">
+                                <!-- Job listings will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sidebar -->
+                    <div class="lg:w-1/3">
+                        <!-- Quick Stats -->
+                        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                            <h3 class="rubik-semibold text-lg mb-4">Quick Stats</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Open Positions</span>
+                                    <span id="stats-jobs" class="rubik-medium">-</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Followers</span>
+                                    <span id="stats-followers" class="rubik-medium">-</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Employees</span>
+                                    <span id="stats-employees" class="rubik-medium">-</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Founded</span>
+                                    <span id="stats-founded" class="rubik-medium">-</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Company Benefits -->
+                        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                            <h3 class="rubik-semibold text-lg mb-4">Benefits & Perks</h3>
+                            <div id="company-benefits" class="space-y-3">
+                                <!-- Benefits will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Similar Companies -->
+                        <div class="bg-white rounded-lg shadow-sm p-6">
+                            <h3 class="rubik-semibold text-lg mb-4">Similar Companies</h3>
+                            <div id="similar-companies" class="space-y-4">
+                                <!-- Similar companies will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error State -->
+            <div id="error-container" class="hidden text-center py-12">
+                <div class="text-red-600 text-lg mb-4">Company not found</div>
+                <a href="companies.html" class="text-blue-600 hover:text-blue-700">← Back to Companies</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">&copy; 2025 JobFinder. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/api.js"></script>
+    <script>
+        // Initialize authentication state
+        initializeAuth();
+        updateAuthUI();
+        
+        // Get company ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const companyId = urlParams.get('id');
+
+        if (!companyId) {
+            showError();
+        } else {
+            loadCompanyDetails(companyId);
+        }
+
+        // Load company details
+        async function loadCompanyDetails(id) {
+            try {
+                showLoading();
+                
+                // Fetch company details
+                const company = await CompanyAPI.getCompanyById(id);
+                
+                // Fetch company jobs
+                const jobs = await JobAPI.getJobsByCompany(id);
+                
+                displayCompanyDetails(company);
+                displayCompanyJobs(jobs);
+                
+                hideLoading();
+            } catch (error) {
+                console.error('Error loading company details:', error);
+                showError();
+            }
+        }
+
+        // Display company details
+        function displayCompanyDetails(company) {
+            // Company logo
+            const logoContainer = document.getElementById('company-logo');
+            logoContainer.textContent = company.name.charAt(0).toUpperCase();
+            
+            // Basic info
+            document.getElementById('company-name').textContent = company.name;
+            document.getElementById('company-industry').textContent = company.industry || 'Technology';
+            document.getElementById('company-location').textContent = company.location || 'Multiple Locations';
+            document.getElementById('company-description').textContent = company.description || 'No description available.';
+            
+            // Company details
+            document.getElementById('company-size').textContent = getCompanySize(company.size);
+            document.getElementById('company-founded').textContent = company.foundedYear || 'N/A';
+            document.getElementById('company-headquarters').textContent = company.headquarters || company.location || 'N/A';
+            
+            if (company.website) {
+                const websiteLink = document.getElementById('company-website');
+                websiteLink.href = company.website;
+                websiteLink.textContent = company.website;
+            } else {
+                document.getElementById('company-website').textContent = 'N/A';
+            }
+
+            // Quick stats
+            document.getElementById('stats-employees').textContent = getCompanySize(company.size);
+            document.getElementById('stats-founded').textContent = company.foundedYear || 'N/A';
+            document.getElementById('stats-followers').textContent = Math.floor(Math.random() * 10000) + 'K';
+
+            // Benefits (mock data)
+            displayBenefits();
+            
+            // Company culture (mock data)
+            displayCulture();
+            
+            // Similar companies (mock)
+            displaySimilarCompanies();
+        }
+
+        // Display company jobs
+        function displayCompanyJobs(jobs) {
+            const jobsContainer = document.getElementById('company-jobs');
+            const jobsCount = document.getElementById('jobs-count');
+            const statsJobs = document.getElementById('stats-jobs');
+            
+            jobsCount.textContent = `${jobs.length} positions`;
+            statsJobs.textContent = jobs.length;
+
+            if (jobs.length === 0) {
+                jobsContainer.innerHTML = '<p class="text-gray-500 text-center py-8">No open positions at the moment.</p>';
+                return;
+            }
+
+            jobsContainer.innerHTML = jobs.map(job => `
+                <div class="border border-gray-200 rounded-lg p-4 hover:border-blue-300 transition-colors">
+                    <div class="flex justify-between items-start">
+                        <div class="flex-1">
+                            <h3 class="rubik-semibold text-lg text-gray-900 mb-1">
+                                <a href="job-details.html?id=${job.id}" class="hover:text-blue-600">${job.title}</a>
+                            </h3>
+                            <p class="text-gray-600 mb-2">${job.location || 'Remote'}</p>
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">${job.type || 'Full-time'}</span>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">${job.experienceLevel || 'Mid-level'}</span>
+                                ${job.isRemote ? '<span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Remote</span>' : ''}
+                            </div>
+                            <p class="text-gray-700 text-sm">${job.description ? job.description.substring(0, 150) + '...' : 'No description available.'}</p>
+                        </div>
+                        <div class="text-right ml-4">
+                            ${job.salaryMin && job.salaryMax ? 
+                                `<p class="text-lg rubik-semibold text-gray-900">$${job.salaryMin}k - $${job.salaryMax}k</p>` : 
+                                '<p class="text-gray-500">Salary not specified</p>'
+                            }
+                            <p class="text-sm text-gray-500">${getTimeAgo(job.postedAt)}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Helper functions
+        function getCompanySize(size) {
+            if (!size) return 'N/A';
+            if (size < 50) return '1-50 employees';
+            if (size < 200) return '51-200 employees';
+            if (size < 1000) return '201-1000 employees';
+            return '1000+ employees';
+        }
+
+        function displayBenefits() {
+            const benefits = [
+                'Health Insurance',
+                'Dental Coverage',
+                'Flexible Work Hours',
+                'Remote Work Options',
+                'Professional Development',
+                'Stock Options',
+                'Gym Membership',
+                'Free Lunch'
+            ];
+
+            const benefitsContainer = document.getElementById('company-benefits');
+            benefitsContainer.innerHTML = benefits.map(benefit => `
+                <div class="flex items-center">
+                    <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-gray-700">${benefit}</span>
+                </div>
+            `).join('');
+        }
+
+        function displayCulture() {
+            const cultureItems = [
+                { title: 'Innovation First', description: 'We encourage creative thinking and new ideas.' },
+                { title: 'Work-Life Balance', description: 'We believe in maintaining a healthy balance.' },
+                { title: 'Continuous Learning', description: 'We invest in our team\'s growth and development.' },
+                { title: 'Collaboration', description: 'We work together to achieve common goals.' }
+            ];
+
+            const cultureContainer = document.getElementById('company-culture');
+            cultureContainer.innerHTML = cultureItems.map(item => `
+                <div class="border-l-4 border-blue-500 pl-4">
+                    <h4 class="rubik-semibold text-gray-900">${item.title}</h4>
+                    <p class="text-gray-600 text-sm">${item.description}</p>
+                </div>
+            `).join('');
+        }
+
+        function displaySimilarCompanies() {
+            const similarCompanies = [
+                { id: 1, name: 'TechCorp', industry: 'Technology' },
+                { id: 2, name: 'InnovateLab', industry: 'Software' },
+                { id: 3, name: 'DataSystems', industry: 'Analytics' }
+            ];
+
+            const similarContainer = document.getElementById('similar-companies');
+            similarContainer.innerHTML = similarCompanies.map(company => `
+                <div class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:border-blue-300 transition-colors">
+                    <div class="w-10 h-10 bg-gray-600 rounded-lg flex items-center justify-center text-white text-sm rubik-bold">
+                        ${company.name.charAt(0)}
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="rubik-semibold text-sm text-gray-900">
+                            <a href="company-details.html?id=${company.id}" class="hover:text-blue-600">${company.name}</a>
+                        </h4>
+                        <p class="text-xs text-gray-600">${company.industry}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getTimeAgo(dateString) {
+            if (!dateString) return 'Recently posted';
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffInDays = Math.floor((now - date) / (1000 * 60 * 60 * 24));
+            
+            if (diffInDays === 0) return 'Today';
+            if (diffInDays === 1) return 'Yesterday';
+            if (diffInDays < 7) return `${diffInDays} days ago`;
+            if (diffInDays < 30) return `${Math.floor(diffInDays / 7)} weeks ago`;
+            return `${Math.floor(diffInDays / 30)} months ago`;
+        }
+
+        function showLoading() {
+            document.getElementById('loading-container').classList.remove('hidden');
+            document.getElementById('company-details').classList.add('hidden');
+            document.getElementById('error-container').classList.add('hidden');
+        }
+
+        function hideLoading() {
+            document.getElementById('loading-container').classList.add('hidden');
+            document.getElementById('company-details').classList.remove('hidden');
+        }
+
+        function showError() {
+            document.getElementById('loading-container').classList.add('hidden');
+            document.getElementById('company-details').classList.add('hidden');
+            document.getElementById('error-container').classList.remove('hidden');
+        }
+
+        // Follow button functionality
+        document.getElementById('follow-btn').addEventListener('click', function() {
+            if (!authState.isAuthenticated) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            const btn = this;
+            if (btn.textContent === 'Follow Company') {
+                btn.textContent = 'Following';
+                btn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                btn.classList.add('bg-green-600', 'hover:bg-green-700');
+            } else {
+                btn.textContent = 'Follow Company';
+                btn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                btn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+            }
+        });
+
+        // Share button functionality
+        document.getElementById('share-btn').addEventListener('click', function() {
+            if (navigator.share) {
+                navigator.share({
+                    title: document.getElementById('company-name').textContent,
+                    text: 'Check out this company on JobFinder',
+                    url: window.location.href
+                });
+            } else {
+                // Fallback to copying URL
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('Link copied to clipboard!');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details - JobFinder</title>
+    
+    <!-- Google Fonts - Rubik -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../src/output.css">
+</head>
+<body class="rubik-regular bg-gray-50 text-gray-900">
+    <!-- Navigation Header -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="../index.html" class="rubik-bold text-2xl text-blue-600">JobFinder</a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="../index.html" class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+                    <a href="jobs.html" class="text-blue-600 rubik-medium">Jobs</a>
+                    <a href="companies.html" class="text-gray-600 hover:text-blue-600 transition-colors">Companies</a>
+                    <a href="profile.html" class="text-gray-600 hover:text-blue-600 transition-colors">Profile</a>
+                </div>
+                
+                <!-- Auth Buttons -->
+                <div class="flex items-center space-x-4" id="auth-buttons">
+                    <a href="login.html" class="text-gray-600 hover:text-blue-600 transition-colors">Login</a>
+                    <a href="register.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Job Details Content -->
+    <section class="py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Back Button -->
+            <div class="mb-6">
+                <button onclick="window.history.back()" class="flex items-center text-blue-600 hover:text-blue-700 transition-colors">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Back to Jobs
+                </button>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm border p-8" id="job-details-container">
+                <!-- Loading State -->
+                <div class="text-center py-12">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+                    <p class="mt-4 text-gray-600">Loading job details...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <h5 class="rubik-bold text-2xl mb-4">JobFinder</h5>
+                    <p class="text-gray-400 mb-4">The leading job search platform connecting talented professionals with top companies worldwide.</p>
+                </div>
+                
+                <div>
+                    <h6 class="rubik-semibold text-lg mb-4">For Job Seekers</h6>
+                    <ul class="space-y-2">
+                        <li><a href="jobs.html" class="text-gray-400 hover:text-white transition-colors">Browse Jobs</a></li>
+                        <li><a href="companies.html" class="text-gray-400 hover:text-white transition-colors">Companies</a></li>
+                        <li><a href="profile.html" class="text-gray-400 hover:text-white transition-colors">Create Profile</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h6 class="rubik-semibold text-lg mb-4">For Employers</h6>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Post Jobs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Search Candidates</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Pricing</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 JobFinder. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            updateAuthButtons();
+            await loadJobDetails();
+        });
+
+        async function loadJobDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const jobId = urlParams.get('id');
+            
+            if (!jobId) {
+                displayError('Job ID not provided');
+                return;
+            }
+
+            try {
+                const job = await JobAPI.getJobById(jobId);
+                displayJobDetails(job);
+            } catch (error) {
+                console.error('Error loading job details:', error);
+                displayError('Failed to load job details. Please try again.');
+            }
+        }
+
+        function displayJobDetails(job) {
+            const container = document.getElementById('job-details-container');
+            
+            container.innerHTML = `
+                <!-- Job Header -->
+                <div class="flex items-start justify-between mb-8">
+                    <div class="flex items-center">
+                        <div class="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center text-white rubik-bold text-xl mr-6">
+                            ${job.company?.name?.charAt(0) || 'C'}
+                        </div>
+                        <div>
+                            <h1 class="rubik-bold text-3xl text-gray-900 mb-2">${job.title}</h1>
+                            <p class="text-xl text-gray-600">${job.company?.name || 'Company Name'}</p>
+                            <div class="flex items-center space-x-4 mt-2 text-gray-500">
+                                <span>📍 ${job.location}</span>
+                                <span>•</span>
+                                <span>💼 ${job.type || 'Full-time'}</span>
+                                <span>•</span>
+                                <span>📅 Posted ${formatDate(job.createdAt)}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="rubik-bold text-2xl text-blue-600">$${job.salaryMin?.toLocaleString() || '0'} - $${job.salaryMax?.toLocaleString() || '0'}</p>
+                        <p class="text-gray-500">${job.experienceLevel || 'Any Level'}</p>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-4 mb-8">
+                    <button onclick="applyToJob(${job.id})" class="bg-blue-600 text-white px-8 py-3 rounded-lg rubik-medium hover:bg-blue-700 transition-colors">
+                        Apply Now
+                    </button>
+                    <button onclick="saveJob(${job.id})" class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors">
+                        Save Job
+                    </button>
+                    <button onclick="shareJob()" class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors">
+                        Share
+                    </button>
+                </div>
+
+                <!-- Job Content -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Main Content -->
+                    <div class="lg:col-span-2">
+                        <!-- Job Description -->
+                        <div class="mb-8">
+                            <h2 class="rubik-semibold text-xl mb-4">Job Description</h2>
+                            <div class="prose max-w-none text-gray-700">
+                                ${job.description || 'No description available.'}
+                            </div>
+                        </div>
+
+                        <!-- Requirements -->
+                        <div class="mb-8">
+                            <h2 class="rubik-semibold text-xl mb-4">Requirements</h2>
+                            <div class="text-gray-700">
+                                ${job.requirements ? job.requirements.split(',').map(req => 
+                                    `<div class="flex items-center mb-2">
+                                        <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        ${req.trim()}
+                                    </div>`
+                                ).join('') : 'No specific requirements listed.'}
+                            </div>
+                        </div>
+
+                        <!-- Benefits -->
+                        <div class="mb-8">
+                            <h2 class="rubik-semibold text-xl mb-4">Benefits</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    Health Insurance
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    401(k) Matching
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    Flexible Hours
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    Remote Work
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="lg:col-span-1">
+                        <!-- Company Info -->
+                        <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                            <h3 class="rubik-semibold text-lg mb-4">About ${job.company?.name || 'Company'}</h3>
+                            <p class="text-gray-700 mb-4">${job.company?.description || 'No company description available.'}</p>
+                            <div class="space-y-2 text-sm text-gray-600">
+                                <div>🏢 ${job.company?.industry || 'Technology'}</div>
+                                <div>👥 ${job.company?.size || '1000+'} employees</div>
+                                <div>🌐 ${job.company?.website || 'N/A'}</div>
+                            </div>
+                            <button onclick="viewCompany(${job.company?.id})" class="w-full mt-4 border border-blue-600 text-blue-600 py-2 rounded-lg hover:bg-blue-50 transition-colors">
+                                View Company Page
+                            </button>
+                        </div>
+
+                        <!-- Similar Jobs -->
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <h3 class="rubik-semibold text-lg mb-4">Similar Jobs</h3>
+                            <div class="space-y-3">
+                                <div class="border-b pb-3">
+                                    <h4 class="rubik-medium text-gray-900">Frontend Developer</h4>
+                                    <p class="text-sm text-gray-600">Google Inc.</p>
+                                    <p class="text-sm text-blue-600">$110K - $160K</p>
+                                </div>
+                                <div class="border-b pb-3">
+                                    <h4 class="rubik-medium text-gray-900">UI/UX Designer</h4>
+                                    <p class="text-sm text-gray-600">Microsoft</p>
+                                    <p class="text-sm text-blue-600">$95K - $140K</p>
+                                </div>
+                                <div>
+                                    <h4 class="rubik-medium text-gray-900">Full Stack Developer</h4>
+                                    <p class="text-sm text-gray-600">Apple</p>
+                                    <p class="text-sm text-blue-600">$130K - $180K</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function displayError(message) {
+            const container = document.getElementById('job-details-container');
+            container.innerHTML = `
+                <div class="text-center py-12">
+                    <div class="text-red-500 text-lg mb-4">${message}</div>
+                    <button onclick="window.history.back()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        Go Back
+                    </button>
+                </div>
+            `;
+        }
+
+        function updateAuthButtons() {
+            if (authState.isAuthenticated) {
+                const authButtons = document.getElementById('auth-buttons');
+                authButtons.innerHTML = `
+                    <span class="text-gray-600">Welcome, ${authState.user?.firstName || 'User'}</span>
+                    <button onclick="AuthAPI.logout()" class="text-gray-600 hover:text-blue-600 transition-colors">Logout</button>
+                `;
+            }
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 1) return '1 day ago';
+            if (diffDays < 7) return `${diffDays} days ago`;
+            if (diffDays < 30) return `${Math.ceil(diffDays / 7)} weeks ago`;
+            return date.toLocaleDateString();
+        }
+
+        function applyToJob(jobId) {
+            if (!authState.isAuthenticated) {
+                window.location.href = `login.html?redirect=${encodeURIComponent(window.location.href)}`;
+                return;
+            }
+            
+            console.log('Applying to job:', jobId);
+            alert('Application submitted successfully!');
+        }
+
+        function saveJob(jobId) {
+            if (!authState.isAuthenticated) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            console.log('Saving job:', jobId);
+            alert('Job saved to your profile!');
+        }
+
+        function shareJob() {
+            if (navigator.share) {
+                navigator.share({
+                    title: document.title,
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('Job link copied to clipboard!');
+            }
+        }
+
+        function viewCompany(companyId) {
+            if (companyId) {
+                window.location.href = `company-details.html?id=${companyId}`;
+            }
+        }
+    </script>
+</body>
+</html>
