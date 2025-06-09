@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobFinder - Find Your Dream Job</title>
+    
+    <!-- Google Fonts - Rubik -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+      <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="src/output.css">
+</head>
+<body class="rubik-regular bg-gray-50 text-gray-900">
+    <!-- Navigation Header -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <h1 class="rubik-bold text-2xl text-blue-600">JobFinder</h1>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-blue-600 rubik-medium">Home</a>
+                    <a href="pages/jobs.html" class="text-gray-600 hover:text-blue-600 transition-colors">Jobs</a>
+                    <a href="pages/companies.html" class="text-gray-600 hover:text-blue-600 transition-colors">Companies</a>
+                    <a href="pages/profile.html" class="text-gray-600 hover:text-blue-600 transition-colors">Profile</a>
+                </div>                <!-- Auth Buttons -->
+                <div class="flex items-center space-x-4">
+                    <!-- Guest Navigation (shown when not authenticated) -->
+                    <div id="guest-nav" class="flex items-center space-x-4">
+                        <a href="pages/login.html" id="loginBtn" class="text-gray-600 hover:text-blue-600 transition-colors">Login</a>
+                        <a href="pages/register.html" id="registerBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">Sign Up</a>
+                    </div>
+                    
+                    <!-- User Menu (shown when authenticated) -->
+                    <div id="userMenu" class="hidden items-center space-x-4">
+                        <span class="text-gray-600">Welcome, <span id="profileBtn" class="font-medium text-blue-600"></span></span>
+                        <a href="pages/profile.html" class="text-gray-600 hover:text-blue-600 transition-colors">Profile</a>
+                        <button id="logoutBtn" class="text-gray-600 hover:text-red-600 transition-colors">Logout</button>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button class="text-gray-600 hover:text-blue-600" id="mobile-menu-btn">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+          <!-- Mobile menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+                <a href="index.html" class="block px-3 py-2 text-blue-600 rubik-medium">Home</a>
+                <a href="pages/jobs.html" class="block px-3 py-2 text-gray-600 hover:text-blue-600">Jobs</a>
+                <a href="pages/companies.html" class="block px-3 py-2 text-gray-600 hover:text-blue-600">Companies</a>
+                <a href="pages/profile.html" class="block px-3 py-2 text-gray-600 hover:text-blue-600">Profile</a>
+                
+                <!-- Mobile Guest Navigation -->
+                <div id="mobile-guest-nav">
+                    <a href="pages/login.html" id="mobile-loginBtn" class="block px-3 py-2 text-gray-600 hover:text-blue-600">Login</a>
+                    <a href="pages/register.html" id="mobile-registerBtn" class="block px-3 py-2 bg-blue-600 text-white rounded-lg mx-3">Sign Up</a>
+                </div>
+                
+                <!-- Mobile User Menu -->
+                <div id="mobile-userMenu" class="hidden">
+                    <div class="block px-3 py-2 text-gray-600">Welcome, <span id="mobile-profileBtn" class="font-medium text-blue-600"></span></div>
+                    <a href="pages/profile.html" class="block px-3 py-2 text-gray-600 hover:text-blue-600">Profile</a>
+                    <button id="mobile-logoutBtn" class="block px-3 py-2 text-left text-gray-600 hover:text-red-600">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-blue-600 to-purple-700 text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="rubik-bold text-4xl md:text-6xl mb-6">Find Your Dream Job</h2>
+            <p class="rubik-regular text-xl md:text-2xl mb-8 text-blue-100">Discover thousands of job opportunities with all the information you need</p>
+            
+            <!-- Search Bar -->
+            <div class="max-w-4xl mx-auto bg-white rounded-lg p-4 shadow-lg">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex-1">
+                        <input type="text" placeholder="Job title, keywords..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900">
+                    </div>
+                    <div class="flex-1">
+                        <input type="text" placeholder="Location" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900">
+                    </div>
+                    <button class="bg-blue-600 text-white px-8 py-3 rounded-lg rubik-medium hover:bg-blue-700 transition-colors">
+                        Search Jobs
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+                <div class="text-center">
+                    <div class="rubik-bold text-3xl md:text-4xl">10K+</div>
+                    <div class="rubik-regular text-blue-100">Active Jobs</div>
+                </div>
+                <div class="text-center">
+                    <div class="rubik-bold text-3xl md:text-4xl">5K+</div>
+                    <div class="rubik-regular text-blue-100">Companies</div>
+                </div>
+                <div class="text-center">
+                    <div class="rubik-bold text-3xl md:text-4xl">50K+</div>
+                    <div class="rubik-regular text-blue-100">Job Seekers</div>
+                </div>
+                <div class="text-center">
+                    <div class="rubik-bold text-3xl md:text-4xl">1M+</div>
+                    <div class="rubik-regular text-blue-100">Success Stories</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Jobs Section -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="rubik-bold text-3xl md:text-4xl text-gray-900 mb-4">Featured Jobs</h3>
+                <p class="rubik-regular text-gray-600 text-lg">Hand-picked opportunities from top companies</p>
+            </div>
+            
+            <!-- Job Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Job Card 1 -->
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center text-white rubik-bold text-lg">T</div>
+                            <div class="ml-3">
+                                <h4 class="rubik-semibold text-lg text-gray-900">Software Engineer</h4>
+                                <p class="text-gray-600">TechCorp Inc.</p>
+                            </div>
+                        </div>
+                        <span class="bg-green-100 text-green-800 text-sm px-2 py-1 rounded">Full-time</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Join our team to build next-generation web applications using modern technologies.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="rubik-semibold text-blue-600">$80K - $120K</span>
+                        <span class="text-gray-500 text-sm">San Francisco, CA</span>
+                    </div>
+                    <div class="mt-4 pt-4 border-t">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">JavaScript</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">React</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Node.js</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job Card 2 -->
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center text-white rubik-bold text-lg">D</div>
+                            <div class="ml-3">
+                                <h4 class="rubik-semibold text-lg text-gray-900">UX Designer</h4>
+                                <p class="text-gray-600">DesignStudio</p>
+                            </div>
+                        </div>
+                        <span class="bg-blue-100 text-blue-800 text-sm px-2 py-1 rounded">Contract</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Create amazing user experiences for our digital products and mobile applications.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="rubik-semibold text-blue-600">$60K - $90K</span>
+                        <span class="text-gray-500 text-sm">Remote</span>
+                    </div>
+                    <div class="mt-4 pt-4 border-t">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Figma</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Adobe XD</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Prototyping</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job Card 3 -->
+                <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center text-white rubik-bold text-lg">M</div>
+                            <div class="ml-3">
+                                <h4 class="rubik-semibold text-lg text-gray-900">Marketing Manager</h4>
+                                <p class="text-gray-600">MarketPro</p>
+                            </div>
+                        </div>
+                        <span class="bg-yellow-100 text-yellow-800 text-sm px-2 py-1 rounded">Part-time</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Lead marketing campaigns and drive growth for our expanding company.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="rubik-semibold text-blue-600">$50K - $70K</span>
+                        <span class="text-gray-500 text-sm">New York, NY</span>
+                    </div>
+                    <div class="mt-4 pt-4 border-t">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">SEO</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Social Media</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">Analytics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="pages/jobs.html" class="bg-blue-600 text-white px-8 py-3 rounded-lg rubik-medium hover:bg-blue-700 transition-colors inline-block">
+                    View All Jobs
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="bg-gray-100 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="rubik-bold text-3xl md:text-4xl text-gray-900 mb-4">How It Works</h3>
+                <p class="rubik-regular text-gray-600 text-lg">Get hired in 3 easy steps</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white rubik-bold text-xl">1</span>
+                    </div>
+                    <h4 class="rubik-semibold text-xl text-gray-900 mb-2">Create Profile</h4>
+                    <p class="text-gray-600">Sign up and create your professional profile with your skills and experience.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white rubik-bold text-xl">2</span>
+                    </div>
+                    <h4 class="rubik-semibold text-xl text-gray-900 mb-2">Search & Apply</h4>
+                    <p class="text-gray-600">Browse thousands of jobs and apply to positions that match your skills.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white rubik-bold text-xl">3</span>
+                    </div>
+                    <h4 class="rubik-semibold text-xl text-gray-900 mb-2">Get Hired</h4>
+                    <p class="text-gray-600">Connect with employers and land your dream job with our platform.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <h5 class="rubik-bold text-2xl mb-4">JobFinder</h5>
+                    <p class="text-gray-400 mb-4">The leading job search platform connecting talented professionals with top companies worldwide.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">Facebook</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">Twitter</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">LinkedIn</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">Instagram</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h6 class="rubik-semibold text-lg mb-4">For Job Seekers</h6>
+                    <ul class="space-y-2">
+                        <li><a href="pages/jobs.html" class="text-gray-400 hover:text-white transition-colors">Browse Jobs</a></li>
+                        <li><a href="pages/companies.html" class="text-gray-400 hover:text-white transition-colors">Companies</a></li>
+                        <li><a href="pages/profile.html" class="text-gray-400 hover:text-white transition-colors">Create Profile</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Career Advice</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h6 class="rubik-semibold text-lg mb-4">For Employers</h6>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Post Jobs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Search Candidates</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Pricing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Employer Resources</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 JobFinder. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>    <!-- JavaScript -->
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

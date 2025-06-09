@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs - JobFinder</title>
+    
+    <!-- Google Fonts - Rubik -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="../src/output.css">
+</head>
+<body class="rubik-regular bg-gray-50 text-gray-900">
+    <!-- Navigation Header -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="../index.html" class="rubik-bold text-2xl text-blue-600">JobFinder</a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="../index.html" class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+                    <a href="jobs.html" class="text-blue-600 rubik-medium">Jobs</a>
+                    <a href="companies.html" class="text-gray-600 hover:text-blue-600 transition-colors">Companies</a>
+                    <a href="profile.html" class="text-gray-600 hover:text-blue-600 transition-colors">Profile</a>
+                </div>
+                
+                <!-- Auth Buttons -->
+                <div class="flex items-center space-x-4">
+                    <a href="login.html" class="text-gray-600 hover:text-blue-600 transition-colors">Login</a>
+                    <a href="register.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="bg-blue-600 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="rubik-bold text-4xl mb-4">Find Your Perfect Job</h1>
+            <p class="text-xl text-blue-100">Explore thousands of opportunities from top companies</p>
+        </div>
+    </section>
+
+    <!-- Search and Filters -->
+    <section class="bg-white py-8 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Search Bar -->
+                <div class="flex-1 flex flex-col md:flex-row gap-4">
+                    <input type="text" id="search-keyword" placeholder="Job title, skills, or company" 
+                           class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <input type="text" id="search-location" placeholder="Location" 
+                           class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <button id="search-button" class="bg-blue-600 text-white px-8 py-3 rounded-lg rubik-medium hover:bg-blue-700 transition-colors">
+                        Search
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Filter Tags -->
+            <div class="mt-6 flex flex-wrap gap-3">
+                <button class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm hover:bg-blue-200 transition-colors">Remote</button>
+                <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-gray-200 transition-colors">Full-time</button>
+                <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-gray-200 transition-colors">Part-time</button>
+                <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-gray-200 transition-colors">Contract</button>
+                <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-gray-200 transition-colors">Entry Level</button>
+                <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm hover:bg-gray-200 transition-colors">Senior Level</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jobs Content -->
+    <section class="py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Sidebar Filters -->
+                <div class="lg:w-1/4">
+                    <div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
+                        <h3 class="rubik-semibold text-lg mb-6">Filters</h3>
+                        
+                        <!-- Job Type -->
+                        <div class="mb-6">
+                            <h4 class="rubik-medium text-gray-900 mb-3">Job Type</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="ml-2 text-gray-700">Full-time (234)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="ml-2 text-gray-700">Part-time (89)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="ml-2 text-gray-700">Contract (156)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="ml-2 text-gray-700">Remote (198)</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Experience Level -->
+                        <div class="mb-6">
+                            <h4 class="rubik-medium text-gray-900 mb-3">Experience Level</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="ml-2 text-gray-700">Entry Level</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="ml-2 text-gray-700">Mid Level</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="ml-2 text-gray-700">Senior Level</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="ml-2 text-gray-700">Executive</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Salary Range -->
+                        <div class="mb-6">
+                            <h4 class="rubik-medium text-gray-900 mb-3">Salary Range</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="ml-2 text-gray-700">Under $50K</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="ml-2 text-gray-700">$50K - $75K</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="ml-2 text-gray-700">$75K - $100K</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="ml-2 text-gray-700">$100K+</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Job Listings -->
+                <div class="lg:w-3/4">
+                    <!-- Results Header -->
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h2 class="rubik-semibold text-xl text-gray-900">1,247 Jobs Found</h2>
+                            <p class="text-gray-600">Showing jobs 1-20 of 1,247</p>
+                        </div>
+                        <select class="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option>Most Recent</option>
+                            <option>Most Relevant</option>
+                            <option>Salary: High to Low</option>
+                            <option>Salary: Low to High</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Job Cards -->
+                    <div id="jobs-container" class="space-y-6">
+                        <!-- Job Card 1 -->
+                        <div class="bg-white rounded-lg shadow-sm p-6 border hover:shadow-md transition-shadow">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center text-white rubik-bold text-lg">G</div>
+                                    <div class="ml-4">
+                                        <h3 class="rubik-semibold text-xl text-gray-900 hover:text-blue-600 cursor-pointer">Senior Frontend Developer</h3>
+                                        <p class="text-gray-600">Google Inc. • San Francisco, CA</p>
+                                        <p class="text-sm text-gray-500">Posted 2 days ago</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Full-time</span>
+                                    <p class="rubik-semibold text-blue-600 text-lg mt-1">$120K - $180K</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 mb-4">We're looking for a skilled Frontend Developer to join our team and help build the next generation of web applications using React, TypeScript, and modern development practices.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">React</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">TypeScript</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">JavaScript</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">CSS</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Git</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-4 border-t">
+                                <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                    <span>5+ years experience</span>
+                                    <span>•</span>
+                                    <span>Bachelor's degree</span>
+                                    <span>•</span>
+                                    <span>Remote friendly</span>
+                                </div>
+                                <div class="flex space-x-3">
+                                    <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors">Save</button>
+                                    <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">Apply Now</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Job Card 2 -->
+                        <div class="bg-white rounded-lg shadow-sm p-6 border hover:shadow-md transition-shadow">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center text-white rubik-bold text-lg">M</div>
+                                    <div class="ml-4">
+                                        <h3 class="rubik-semibold text-xl text-gray-900 hover:text-blue-600 cursor-pointer">Product Manager</h3>
+                                        <p class="text-gray-600">Microsoft • Seattle, WA</p>
+                                        <p class="text-sm text-gray-500">Posted 1 day ago</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Full-time</span>
+                                    <p class="rubik-semibold text-blue-600 text-lg mt-1">$110K - $160K</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 mb-4">Lead product development initiatives and work with cross-functional teams to deliver innovative software solutions that impact millions of users worldwide.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Product Strategy</span>
+                                <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Agile</span>
+                                <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Data Analysis</span>
+                                <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Roadmapping</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-4 border-t">
+                                <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                    <span>3+ years experience</span>
+                                    <span>•</span>
+                                    <span>MBA preferred</span>
+                                    <span>•</span>
+                                    <span>Hybrid</span>
+                                </div>
+                                <div class="flex space-x-3">
+                                    <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors">Save</button>
+                                    <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">Apply Now</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Job Card 3 -->
+                        <div class="bg-white rounded-lg shadow-sm p-6 border hover:shadow-md transition-shadow">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center text-white rubik-bold text-lg">S</div>
+                                    <div class="ml-4">
+                                        <h3 class="rubik-semibold text-xl text-gray-900 hover:text-blue-600 cursor-pointer">UX/UI Designer</h3>
+                                        <p class="text-gray-600">Spotify • Stockholm, Sweden</p>
+                                        <p class="text-sm text-gray-500">Posted 3 days ago</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">Contract</span>
+                                    <p class="rubik-semibold text-blue-600 text-lg mt-1">$80K - $120K</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 mb-4">Design beautiful and intuitive user experiences for our music streaming platform. Work with product teams to create engaging interfaces that delight millions of users.</p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Figma</span>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Sketch</span>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Prototyping</span>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">User Research</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-4 border-t">
+                                <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                    <span>2+ years experience</span>
+                                    <span>•</span>
+                                    <span>Portfolio required</span>
+                                    <span>•</span>
+                                    <span>Remote OK</span>
+                                </div>
+                                <div class="flex space-x-3">
+                                    <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors">Save</button>
+                                    <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">Apply Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="flex justify-center mt-12">
+                        <div class="flex items-center space-x-2">
+                            <button class="px-4 py-2 border border-gray-300 rounded-lg text-gray-500 hover:bg-gray-50 transition-colors">Previous</button>
+                            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg">1</button>
+                            <button class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">2</button>
+                            <button class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">3</button>
+                            <span class="px-2 text-gray-500">...</span>
+                            <button class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">63</button>
+                            <button class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <h5 class="rubik-bold text-2xl mb-4">JobFinder</h5>
+                    <p class="text-gray-400 mb-4">The leading job search platform connecting talented professionals with top companies worldwide.</p>
+                </div>
+                
+                <div>
+                    <h6 class="rubik-semibold text-lg mb-4">For Job Seekers</h6>
+                    <ul class="space-y-2">
+                        <li><a href="jobs.html" class="text-gray-400 hover:text-white transition-colors">Browse Jobs</a></li>
+                        <li><a href="companies.html" class="text-gray-400 hover:text-white transition-colors">Companies</a></li>
+                        <li><a href="profile.html" class="text-gray-400 hover:text-white transition-colors">Create Profile</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h6 class="rubik-semibold text-lg mb-4">For Employers</h6>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Post Jobs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Search Candidates</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Pricing</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2025 JobFinder. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+    <script>        // Jobs page specific functionality
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('[JOBS_PAGE] DOMContentLoaded event fired.');
+            // Initialize authentication state
+            if (typeof initAuth === 'function') {
+                console.log('[JOBS_PAGE] Initializing authentication.');
+                initAuth();
+            }
+            
+            // Load jobs and setup functionality
+            console.log('[JOBS_PAGE] Starting initial job load.');
+            await loadJobs();
+            console.log('[JOBS_PAGE] Initial job load complete. Setting up filters.');
+            setupFilters();
+            console.log('[JOBS_PAGE] Filters setup complete. Setting up search.');
+            setupSearch();
+            console.log('[JOBS_PAGE] All setup in DOMContentLoaded complete.');
+        });// Load jobs from API
+        async function loadJobs(filters = {}) {
+            console.log('[JOBS_PAGE] loadJobs called with filters:', JSON.stringify(filters));
+            try {
+                const response = await JobAPI.getAllJobs(filters);
+                console.log('[JOBS_PAGE] API Response:', response); // Existing debugging line
+
+                const jobs = response && response.content ? response.content : []; // Safer access
+                console.log('[JOBS_PAGE] Jobs to display (count):', jobs.length);
+                if (jobs.length > 0) {
+                    console.log('[JOBS_PAGE] First job to display:', jobs[0]);
+                }
+
+                displayJobs(jobs);
+                
+                // Update pagination info if available
+                if (response && response.totalElements !== undefined) { // Safer access
+                    updatePaginationInfo(response);
+                }
+            } catch (error) {
+                console.error('[JOBS_PAGE] Error loading jobs:', error);
+                displayError('Failed to load jobs. Please try again later.');
+                // Optionally, ensure the jobs container shows an error message clearly
+                const jobsContainer = document.getElementById('jobs-container');
+                if (jobsContainer) {
+                    jobsContainer.innerHTML = '<p class="text-center text-red-600 py-12">An error occurred while loading jobs. Please try again.</p>';
+                }
+            }
+        }
+
+        // Display jobs in the UI
+        function displayJobs(jobs) {
+            const jobsContainer = document.getElementById('jobs-container');
+            if (!jobsContainer) return;
+
+            if (!jobs || jobs.length === 0) {
+                jobsContainer.innerHTML = `
+                    <div class="text-center py-12">
+                        <p class="text-gray-500 text-lg">No jobs found matching your criteria.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            jobsContainer.innerHTML = jobs.map(job => createJobCard(job)).join('');
+        }
+
+        // Create a job card HTML
+        function createJobCard(job) {
+            // Ensure job and job.description are checked to prevent errors if they are null/undefined
+            const description = job && job.description ? job.description.substring(0, 200) : 'No description available';
+            return `
+                <div class="bg-white rounded-lg shadow-sm p-6 border hover:shadow-md transition-shadow">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center">
+                            <!-- Company Logo and Name -->
+                            <img src="${job && job.companyLogo ? job.companyLogo : 'https://via.placeholder.com/40'}" alt="${job && job.companyName ? job.companyName : 'Company'}" class="w-10 h-10 rounded-full mr-3 object-contain">
+                            <div>
+                                <h3 class="text-lg font-semibold text-blue-600 hover:underline">
+                                    <a href="job-details.html?id=${job ? job.id : ''}">${job && job.title ? job.title : 'Job Title Not Available'}</a>
+                                </h3>
+                                <p class="text-sm text-gray-600">${job && job.companyName ? job.companyName : 'Company Name Not Available'}</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <!-- Salary -->
+                            <p class="text-lg font-semibold text-green-600">${job && job.salary ? job.salary : 'N/A'}</p>
+                            <p class="text-xs text-gray-500">${job && job.jobType ? job.jobType : 'N/A'} &bull; ${job && job.location ? job.location : 'N/A'}</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">${description}...</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <!-- Skills/Tags -->
+                        ${job && job.skills && job.skills.length > 0 ? job.skills.slice(0, 3).map(skill => `<span class="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-xs">${skill}</span>`).join('') : '<span class="text-xs text-gray-400">No skills listed</span>'}
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t">
+                        <span class="text-xs text-gray-500">Posted: ${job && job.postedDate ? formatDate(job.postedDate) : 'N/A'}</span>
+                        <a href="job-details.html?id=${job ? job.id : ''}" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm">View Details</a>
+                    </div>
+                </div>
+            `;
+        }        // Setup search functionality
+        function setupSearch() {
+            const searchButton = document.getElementById('search-button');
+            const searchKeyword = document.getElementById('search-keyword');
+            const searchLocation = document.getElementById('search-location');
+            
+            if (searchButton) {
+                searchButton.addEventListener('click', async function(e) {
+                    e.preventDefault(); // Prevent default form submission if it's in a form
+                    const keyword = searchKeyword ? searchKeyword.value : '';
+                    const location = searchLocation ? searchLocation.value : '';
+                    // TODO: Combine with filters from the filter section
+                    console.log('[JOBS_PAGE] Search button clicked. Loading jobs with keyword:', keyword, 'location:', location);
+                    await loadJobs({ keyword: keyword, location: location /*, ...otherFilters */ });
+                });
+            }
+            
+            // Add enter key support for search inputs
+            [searchKeyword, searchLocation].forEach(input => {
+                if (input) {
+                    input.addEventListener('keypress', async function(e) {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            const keyword = searchKeyword ? searchKeyword.value : '';
+                            const location = searchLocation ? searchLocation.value : '';
+                            // TODO: Combine with filters from the filter section
+                            console.log('[JOBS_PAGE] Enter key pressed in search. Loading jobs with keyword:', keyword, 'location:', location);
+                            await loadJobs({ keyword: keyword, location: location /*, ...otherFilters */ });
+                        }
+                    });
+                }
+            });
+        }
+
+        // Setup filter functionality
+        function setupFilters() {
+            const filterCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+            filterCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    applyFilters();
+                });
+            });
+        }
+
+        // Apply filters
+        async function applyFilters() {
+            const filters = {};
+            
+            // Get selected job types
+            const jobTypes = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+                .map(cb => cb.closest('label')?.textContent?.trim())
+                .filter(text => text && (text.includes('Full-time') || text.includes('Part-time') || text.includes('Contract') || text.includes('Remote')));
+            
+            if (jobTypes.length > 0) {
+                filters.type = jobTypes;
+            }
+            
+            await loadJobs(filters);
+        }
+
+        // Utility functions
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 1) return '1 day ago';
+            if (diffDays < 7) return `${diffDays} days ago`;
+            if (diffDays < 30) return `${Math.ceil(diffDays / 7)} weeks ago`;
+            return date.toLocaleDateString();
+        }
+
+        function viewJob(jobId) {
+            // Navigate to job details page
+            window.location.href = `job-details.html?id=${jobId}`;
+        }
+
+        function saveJob(jobId) {
+            // Add to saved jobs
+            console.log('Saving job:', jobId);
+            // Implement save functionality
+        }        function applyToJob(jobId) {
+            // Check if user is logged in
+            const isAuthenticated = (typeof authState !== 'undefined' && authState.isAuthenticated) || 
+                                   (typeof AuthAPI !== 'undefined' && AuthAPI.isAuthenticated());
+            
+            if (!isAuthenticated) {
+                // Redirect to login page
+                window.location.href = 'login.html?redirect=' + encodeURIComponent(window.location.href);
+                return;
+            }
+            
+            // Apply to job
+            console.log('Applying to job:', jobId);
+            alert('Application functionality will be implemented soon!');
+            // Future enhancement: Implement actual job application API call
+        }function displayError(message) {
+            const jobsContainer = document.getElementById('jobs-container');
+            if (jobsContainer) {
+                jobsContainer.innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="text-red-500 text-lg">${message}</div>
+                        <button onclick="loadJobs()" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Try Again
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // Update pagination information
+        function updatePaginationInfo(paginationData) {
+            const totalJobs = paginationData.totalElements || 0;
+            const currentPage = (paginationData.currentPage || 0) + 1; // Backend uses 0-based indexing
+            const pageSize = paginationData.size || 20;
+            const startJob = ((currentPage - 1) * pageSize) + 1;
+            const endJob = Math.min(currentPage * pageSize, totalJobs);
+            
+            // Update the results header
+            const resultsHeader = document.querySelector('.lg\\:w-3\\/4 h2');
+            const resultsSubtext = document.querySelector('.lg\\:w-3\\/4 p.text-gray-600');
+            
+            if (resultsHeader) {
+                resultsHeader.textContent = `${totalJobs.toLocaleString()} Jobs Found`;
+            }
+            
+            if (resultsSubtext && totalJobs > 0) {
+                resultsSubtext.textContent = `Showing jobs ${startJob}-${endJob} of ${totalJobs.toLocaleString()}`;
+            } else if (resultsSubtext) {
+                resultsSubtext.textContent = 'No jobs found';
+            }
+        }
+    </script>
+</body>
+</html>
